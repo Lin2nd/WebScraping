@@ -65,7 +65,6 @@ def main():
         # to-do: format as 4 digits + hyphen + 4 digits?
         open_journal_page(issn)
     # better to use atexit
-    driver.close()
     driver.quit()
 
 
