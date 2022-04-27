@@ -25,15 +25,15 @@ def extract_cookies2():
     for cookie in response.cookies:
         print(cookie.name, ": ", cookie.value)
 
-# Not working. Empty list
+# Working
 def extract_cookies3():
     driver = webdriver.Chrome()
     driver.get(URL)
     sleep(3)
     cookies = driver.get_cookies()
-    print(cookies)
     for cookie in cookies:
-        pass
+        if cookie["name"] == "PSSID":
+            print(cookie["value"])
 
 # Weird but working
 def extract_cookies4():
@@ -45,4 +45,7 @@ def extract_cookies4():
 
 
 if __name__ == "__main__":
+    print("Result from extract_cookies3")
+    extract_cookies3()
+    print("Result from extract_cookies4")
     extract_cookies4()
