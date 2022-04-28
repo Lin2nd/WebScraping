@@ -2,6 +2,8 @@ import urllib
 import http.cookiejar
 import requests
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 from time import sleep
 
 
@@ -27,25 +29,26 @@ def extract_cookies2():
 
 # Working
 def extract_cookies3():
-    driver = webdriver.Chrome()
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
     driver.get(URL)
-    sleep(3)
+    # sleep(3)
     cookies = driver.get_cookies()
     for cookie in cookies:
         if cookie["name"] == "PSSID":
             print(cookie["value"])
+            break
 
 # Weird but working
 def extract_cookies4():
-    driver = webdriver.Chrome()
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
     driver.get(URL)
-    sleep(3)
+    # sleep(3)
     cookie = driver.execute_script("return document.cookie.match(\"PSSID=(.*?);\")")
     print(cookie[1])
 
 
 if __name__ == "__main__":
-    print("Result from extract_cookies3")
-    extract_cookies3()
-    print("Result from extract_cookies4")
-    extract_cookies4()
+    # print("Result from extract_cookies3")
+     extract_cookies3()
+    # print("Result from extract_cookies4")
+    # extract_cookies4()
