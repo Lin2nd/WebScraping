@@ -1,4 +1,4 @@
-import time
+from time import sleep
 # selenium 4.1.3
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
@@ -19,7 +19,7 @@ driver = None
 WAIT_ELEMENT = 30
 SEARCH_BAR_ID = "search-bar"
 COOKIE_BUTTON_ID = "onetrust-accept-btn-handler"
-RESULT_CSS = "body > div.incites-jcr3-fe-root > div.incites-jcr3-fe-home.ng-star-inserted > div > div > div.col-sm-8.col-md-8.col-lg-8 > section.search-section > div > form > div > div > div:nth-child(2) > div.col-sm-8.col-md-8.col-lg-8.ng-star-inserted > p"
+RESULT_CLASSNAME = "pop-content.journal-title"
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 
 
@@ -45,12 +45,11 @@ def open_journal_page(issn):
     driver.get(homeURL)
     WebDriverWait(driver, WAIT_ELEMENT).until(EC.presence_of_element_located((By.ID, SEARCH_BAR_ID))).send_keys(issn)
     # not good. to be figure out later
-    if i==1:
+    if i == 1:
         WebDriverWait(driver, WAIT_ELEMENT).until(EC.presence_of_element_located((By.ID, COOKIE_BUTTON_ID))).click()
     # click the journal page in the drop-down
-    WebDriverWait(driver, WAIT_ELEMENT).until(EC.presence_of_element_located((By.CSS_SELECTOR, RESULT_CSS))).click()
-
-    time.sleep(3)
+    WebDriverWait(driver, WAIT_ELEMENT).until(EC.presence_of_element_located((By.CLASS_NAME, RESULT_CLASSNAME))).click()
+    sleep(3)
 
 
 def get_quartiles(issn):
