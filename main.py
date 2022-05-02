@@ -97,7 +97,7 @@ def crawl_page(issn):
 
 def get_homepage():
     # The driver.maximize_window() line may be useful. To avoid problems caused by dynamic load
-    # Although the "accept cookies" button is identified by class name, It seems somehow it is actually located by the coordinates
+    # Although the "accept cookies" button is identified by ID, It seems somehow it is actually located by the coordinates
     # W/o this line, *SOMETIMES* the "Message: element click intercepted: Element is not clickable at point (631, 758)"/Message: element not interactable exception arises
     # Maximize the window may tackle the problem. If it does not work, the exception will be caught and dealt with by driver.execute_script('document.querySelector("#onetrust-accept-btn-handler").click()')
     driver.maximize_window()
